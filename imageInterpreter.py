@@ -14,7 +14,7 @@ except ModuleNotFoundError:
 #import image
 #create a window 
 #where you can import your own images
-def main():
+def wind():
     #print("Starting program...")
     root = tk.Tk()
     root.title("HC2L")
@@ -56,6 +56,7 @@ def picture_import():
     #now there should be a global variable named image
 
 def return_image():
+    wind()
     try:
         #img.show()
         return img
@@ -63,9 +64,17 @@ def return_image():
         print("Image not yet retrieved!")
         return None
 
-main()
-try:
-    return_image().show()
-except:
-    print("Image still not retrieved...")
+#uses Pillow (PIL) to get various data about the image
+def image_data(image):
+    print(image[0])#.width)
+    print(image[1])#.height)
+    return(image.size)
+    #print(return_image().width())
+    #print(return_image().height())
+    #width = img.width
+    #height = img.height
+    #print('width: ', width)
+    #print('height:', height)
+    #return(width,height)
+    return(0,0)
 
