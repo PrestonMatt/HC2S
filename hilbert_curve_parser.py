@@ -1,7 +1,6 @@
 try:
     from PIL import Image, ImageColor
     import imageInterpreter
-    from matplotlib.pyplot import plot
 except ModuleNotFoundError:
     print("Import failed; module not found.")
 
@@ -39,8 +38,9 @@ def iterative_hc(hil_index, N):
     
     #print(x)
     #print(y)
-
-    for n in range(4, N+1):
+    n = 4
+    for n in range(4, N+1, n):
+        print(n)
         prev_n = n / 2
         #four cases:
 
@@ -50,18 +50,24 @@ def iterative_hc(hil_index, N):
             temp = x
             x = y
             y = temp
+
+            print("X: ",x,"Y: ",y)
             #return None
         #1 & 3 is last two bits of 0001
         #therefore this position is: top left
         if(order2HCbits(hil_index) == 1):
             x = x
             y = y + prev_n
+
+            print("X: ",x,"Y: ",y)
             #return None
         #0 & 3 is last two bits of 0010
         #therefore this position is: top right
         if(order2HCbits(hil_index) == 2):
             x = x + prev_n
             y = y + prev_n
+
+            print("X: ",x,"Y: ",y)
             #return None
         #0 & 3 is last two bits of 0011
         #therefore this position is: bottom right
@@ -70,10 +76,12 @@ def iterative_hc(hil_index, N):
             y = (prev_n - 1) - x
             x = (prev_n - 1) - temp
             x = x + prev_n
+
+            print("X: ",x,"Y: ",y)
             #return None
             
         hil_index >> 2
-        n = n*2
+        #n = n * 2
     return [x,y]
 
 #initial goal, we need an image of power of 2 in area
@@ -93,29 +101,27 @@ def check_image(N):
 def hil_curve_list(photo_dim):
     hc2c = []
     if(check_image(photo_dim)):
-        for x in range((photo_dim*photo_dim)+1):
+        for x in range(photo_dim*photo_dim):
             curnt = iterative_hc(x,photo_dim)
+            print(curnt)
             hc2c.append(curnt)
     return hc2c
 
-#get img:
-img = imageInterpreter.return_image()
-wid_hig = imageInterpreter.image_data(img)
-print(wid_hig)
-
-#try:
-    #get img:
-#    img = imageInterpreter.return_image()
-#    wid_hig = imageInterpreter.image_data(img)
-#    print(wid_hig)
-    #wid_hig = imageInterpreter.image_data()
-#    if(wid_hig[0] != wid_hig[1]):
-#        raise ValueError("Image is not square!")
-    #assumeing image is square
-    #iterative_hc(image_data()[0])
-#except ValueError:
-#    print(ValueError)
-#except AttributeError:
-#    print(AttributeError)
-#else:
-#    print("error unknown")
+#TODO:
+def getting_image_and_curve():
+    try:
+        #get img:
+        img = imageInterpreter.return_image()
+        wid_hig = imageInterpreter.image_data(img)
+        print(wid_hig)
+        #wid_hig = imageInterpreter.image_data()
+        if(wid_hig[0] != wid_hig[1]):
+            raise ValueError("Image is not square!")
+        #assumeing image is square
+        #iterative_hc(image_data()[0])
+    except ValueError:
+        print(ValueError)
+    except AttributeError:
+        print(AttributeError)
+    else:
+        print("error unknown")
