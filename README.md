@@ -1,7 +1,25 @@
 # Hilbert Curve to Sound Project
 This project is inspired by the 'fantastical' (i.e. not-yet-realized) code described in this video: https://www.youtube.com/watch?v=3s7h2MHQtxc and this project: https://community.wolfram.com/groups/-/m/t/1862464
 
-26 March 2020
+## UPDATE 26 March 2023:
+Install requirements via command line with the following command:
+
+`pip3 install -r requirements.txt`
+
+I have overhauled imageInterpreter.py to an initial functional working state, and created a quirky Hilbert-Curve iterative function. There are also auto-genearted test cases from the Pilloe (PIL) Image library. What's next is to hook up the image upload to the curve function and generate noise from there. Then, I envision taking the sound signal and trying to decompose it using a Fourier Transform.
+
+I envision experimentation with ML to be as follows:
+ 1. Can a basic ML model tell from a given sound byte if the 'image' is bee or 'three'?
+  - I.E. given just the sound, categorize the image
+  - Is this easier given a decomposed Fourier Transform?
+  - Which general model works best (neural net, logistic regression, etc.)
+ 2. Can a basic ML model roughly reproduce an image from a sound byte?
+  - How well is the reproduction compared to the original?
+  - Again, which model does it best?
+ 3. Can this sound to category or sound to image model have a real-world application?
+  - Is it easier to train on sound-bits from images rather than images themselves?
+
+## Project Statement 26 March 2020
 
 ## Abstract
 
@@ -14,17 +32,18 @@ This is in contrast to other, more intuitive space filling curves such as the �
 ## Concrete Problem Statement
 
 In this project, my initial goals are to:
-1.	Program a (scalable) algorithm that parses a square image using a pseudo-Hilbert curve without using outside modules.
-2.	Take that parsed data and transform it into a sound with frequencies mapped to color and brightness mapped to volume.
-3.	Take a sound bit encoded the same as above and decode it back into an image.
-4.	Make this application usable with a passible user interface/GUI.
+ - [ ]	Program a (scalable) algorithm that parses a square image using a pseudo-Hilbert curve without using outside modules.
+ - [ ]	Take that parsed data and transform it into a sound with frequencies mapped to color and brightness mapped to volume.
+ - [ ]	Take a sound bit encoded the same as above and decode it back into an image.
+ - [ ]	Make this application usable with a passible user interface/GUI.
 
 My stretch goals are to:
-1.	See if I can use a combination of Fourier Transform and machine learning libraries in the SKLearn module to try to classify these ‘images-as-sounds’.
+ - [ ]	See if I can use a combination of Fourier Transform and machine learning libraries in the SKLearn module to try to classify these ‘images-as-sounds’.
   -	For example, we can train neural networks to identify things like a bee versus a three. What about when these images are encoded as sounds? Does that make it easier or harder for an ML model to classify?
-2.	Scale the Hilbert Curve tracer to parse non-square image files.
-3.	Give the program a function to use differently shaped curves; in looking at pictures of Peano’s and Hilbert’s different curves you’ll see what I mean.
-4.	Create a tutorial for the user to try to get a grasp on trying to ‘see’ with sound.
+ - [x]	Scale the Hilbert Curve tracer to parse non-square image files. 
+  - (Update 26 Mar '23: Fulfilled by compress_image() in imageInterpreter.py)
+ - [ ]	Give the program a function to use differently shaped curves; in looking at pictures of Peano’s and Hilbert’s different curves you’ll see what I mean.
+ - [ ]	Create a tutorial for the user to try to get a grasp on trying to ‘see’ with sound.
 
 ## Potential Challenges
 
