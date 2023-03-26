@@ -11,7 +11,7 @@ The sample image used is from publicdomainpictures.net and can be found here: ht
 I have overhauled imageInterpreter.py to an initial functional working state, and created a quirky Hilbert-Curve iterative function. There are also auto-genearted test cases from the Pilloe (PIL) Image library. What's next is to hook up the image upload to the curve function and generate noise from there. Then, I envision taking the sound signal and trying to decompose it using a Fourier Transform.
 
 I envision experimentation with ML to be as follows:
- 1. Can a basic ML model tell from a given sound byte if the 'image' is bee or 'three'?
+ 1. Can a basic ML model tell from a given sound byte if the image is 'bee' or 'three'?
   - I.E. given just the sound, categorize the image
   - Is this easier given a decomposed Fourier Transform?
   - Which general model works best (neural net, logistic regression, etc.)
