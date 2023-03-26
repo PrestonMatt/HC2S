@@ -10,16 +10,6 @@ except ModuleNotFoundError:
 #-------------------------------------------------------------------------------------------#
 #we will get the hilbert curve by computing up
 #mapping bits to cartesian coordinates
-#therefore for the first psuedo hilbert curve we need
-#a function that gives the last two bits
-#returning n & 3 will do this: https://www.tutorialspoint.com/python3/python_basic_operators.htm
-def order2HCbits(hil_index):
-    return (hil_index & 3)
-
-def pos_in_order2():
-    return [[0,0], [0,1], [1,1], [1,0]]
-    #notably, the order in hilbert curve will be like this
-    #not 00 01 10 11
 
 #go through an image, pixel to pixel
 #in a hilbert curve way
@@ -27,62 +17,48 @@ def pos_in_order2():
 #the cartesian coordinates that our computer needs.
 #given N as height and width of image...
 def iterative_hc(hil_index, N):
-    temp = pos_in_order2()[order2HCbits(hil_index)]
-    hil_index = (hil_index >> 2);
+    #Starting point is always 0,0
+    x, y = 0, 0
+    #iteratively calculate the coordinate:
+    for n in range(1, N):
+        #size:
+        prev_n = 1 << (n-1)
 
-    #print(temp)
+        #Determine if its Bottom Left, Top Left, Top Right, or Bottom Right
+        quadrent_index = ((hil_index >> (2*(n-1))) & 0x3)
 
-    x = temp[0]
-    y = temp[1]
+        #I need this to act like a switch
+        #Bottom Left
+        #0 & 3 is last two bits of 00...'00'
+        if(quadrent_index == 0):
+            #swap
+            x, y = y, x
 
-    
-    #print(x)
-    #print(y)
-    n = 4
-    for n in range(4, N+1, n):
-        print(n)
-        prev_n = n / 2
-        #four cases:
+        #Top Left
+        #1 & 3 is last two bits of 00...'01'
+        elif(quadrent_index == 1):
+            #add size to y and leave x be
+            y += prev_n
 
-        #0 & 3 is last two bits of 0000
-        #therefore this position is: bottom left
-        if(order2HCbits(hil_index) == 0):
-            temp = x
-            x = y
-            y = temp
+        #Top Right
+        #2 & 3 is last two bits of 00...'10'
+        elif(quadrent_index == 2):
+            #add size to x AND y
+            x += prev_n
+            y += prev_n
 
-            print("X: ",x,"Y: ",y)
-            #return None
-        #1 & 3 is last two bits of 0001
-        #therefore this position is: top left
-        if(order2HCbits(hil_index) == 1):
-            x = x
-            y = y + prev_n
+        #Bottom Right
+        #3 & 3 is last two bits of 00...'11'
+        elif(quadrent_index == 3):
+            #swap and subtract size
+            x, y = prev_n - 1 - y, prev_n - 1 - x
+            #flip x again
+            x += prev_n
 
-            print("X: ",x,"Y: ",y)
-            #return None
-        #0 & 3 is last two bits of 0010
-        #therefore this position is: top right
-        if(order2HCbits(hil_index) == 2):
-            x = x + prev_n
-            y = y + prev_n
-
-            print("X: ",x,"Y: ",y)
-            #return None
-        #0 & 3 is last two bits of 0011
-        #therefore this position is: bottom right
-        if(order2HCbits(hil_index) == 3):
-            temp = y
-            y = (prev_n - 1) - x
-            x = (prev_n - 1) - temp
-            x = x + prev_n
-
-            print("X: ",x,"Y: ",y)
-            #return None
-            
-        hil_index >> 2
-        #n = n * 2
-    return [x,y]
+        #Place Holder
+        else:
+            raise ValueError("Invalid quad index")
+    return [x, y]
 
 #initial goal, we need an image of power of 2 in area
 def check_image(N):
