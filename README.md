@@ -6,6 +6,8 @@ Install requirements via command line with the following command:
 
 `pip3 install -r requirements.txt`
 
+The sample image used is from publicdomainpictures.net and can be found here: https://as2.ftcdn.net/jpg/03/04/58/91/220_F_304589144_Zcp4X2dHDJvSBO6mx98bj1kuLIPY6HwW.jpg
+
 I have overhauled imageInterpreter.py to an initial functional working state, and created a quirky Hilbert-Curve iterative function. There are also auto-genearted test cases from the Pilloe (PIL) Image library. What's next is to hook up the image upload to the curve function and generate noise from there. Then, I envision taking the sound signal and trying to decompose it using a Fourier Transform.
 
 I envision experimentation with ML to be as follows:
