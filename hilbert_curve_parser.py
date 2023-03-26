@@ -2,7 +2,7 @@ try:
     from PIL import Image, ImageColor
     import imageInterpreter
 except ModuleNotFoundError:
-    print("Import failed; module not found.")
+    print("Import failed; module not found.\nTry running the following command:\npip3 install -r requirements.txt")
 
 #goal of this file:
 #given an Image object,
@@ -66,12 +66,12 @@ def check_image(N):
     while(dim > 1.0):
         dim = (dim / 2.0)
         #test: print(dim)
-    if(dim == 1.0): #we have a square image
-        print("Image fine")
+    if(dim == 1.0): #we have a power of 2 & square image
+        #print("Image fine")
         return True
     
     #otherwise, area will be less than 1 as a decimal
-    print("Image will not be fit to a hilbert curve")
+    raise ValueError("Image will not be fit to a hilbert curve")
     return False
 
 def hil_curve_list(photo_dim):
@@ -91,8 +91,9 @@ def getting_image_and_curve():
         wid_hig = imageInterpreter.image_data(img)
         print(wid_hig)
         #wid_hig = imageInterpreter.image_data()
-        if(wid_hig[0] != wid_hig[1]):
-            raise ValueError("Image is not square!")
+        #This should already be taken care of by the compression function
+        #if(wid_hig[0] != wid_hig[1]):
+            #raise ValueError("Image is not square!")
         #assumeing image is square
         #iterative_hc(image_data()[0])
     except ValueError:

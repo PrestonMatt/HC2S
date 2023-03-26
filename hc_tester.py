@@ -1,15 +1,21 @@
 try:
+    import sys
     from matplotlib import pyplot as plt
     import hilbert_curve_parser
+    import imageInterpreter
     from numpy import linspace
 except ModuleNotFoundError:
-    print("Import failed; module not found.")
+    print("Import failed; module not found.\nTry running the following command:\npip3 install -r requirements.txt")
 
 def main():
-    
-    for order in range(6):
-        print("Plotting Hilbert Curve of order %d" % order)
-        plot_hcurve(2**order)
+    app = imageInterpreter.ImageIngestApp()
+    app.mainloop()
+    #for order in range(6):
+        #print("Plotting Hilbert Curve of order %d" % order)
+        #plot_hcurve(2**order)
+    #img = imageInterpreter.return_image()
+    #imageInterpreter.write_resized_image_to_filesys(img)
+    #hilbert_curve_parser.getting_image_and_curve()
 
 def plot_hcurve(order:int):
     colors = list(linspace(0.0, 1.0, order*order))
