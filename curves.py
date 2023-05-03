@@ -10,6 +10,7 @@ try:
     from hilbert import decode, encode
     import hilbert_curve_parser
     #import itertools
+    from random import sample
 except ModuleNotFoundError:
     print("Import failed; module not found.\nTry running the following command:\npip3 install -r requirements.txt")
 
@@ -93,12 +94,21 @@ def hibert_curve(dimension,order):
     print(curve)
     return(curve)
 
-def quirky_hil_curve(order):
+def quirky_hil_curve(order: int) -> list:
     return(hilbert_curve_parser.hil_curve_list(order))
 
-def snake_curve():
+def snake_curve(width:int) -> list:
 
-    return([[0,0]])
+    points = []
+    for y in range(width+1):
+        if(y % 2 == 0):
+            for x in range(0,width+1,1):
+                points.append([x,y])
+        else: #y is odd
+            for x in range(width,-1,-1): #starts at width, goes down until 0
+                points.append([x,y])
+    
+    return(points)
 
 def peano_curve():
 
@@ -120,28 +130,41 @@ def moore_curve():
 
     return([[0,0]])
 
-def random_curve():
+def random_curve(width:int) -> list:
+    
+    points = []
+    for x in range(width):
+        for y in range(width):
+            points.append([x,y])
 
-    return([[0,0]])
+    #Randomize it:
+    points = sample(points,len(points))
+    #print(points)
+    
+    return(points)
 
 def main():
 
-    hcurve1 = hibert_curve(1,32)
-    plotter(hcurve1)
+    #hcurve1 = hibert_curve(1,32)
+    #plotter(hcurve1)
     #proceed = input(">")
     
     #hilbert = hil_curve(64)
     hilbert = hil_curve(64)
     plotter(hilbert)
     #proceed = input(">")
-    
-    qhilbert = quirky_hil_curve(512)
-    plotter(qhilbert)
+
+    #un comment this when you want, but it current takes a long time.
+    #qhilbert = quirky_hil_curve(512)
+    #plotter(qhilbert)
+
+    snakes = snake_curve(8)
+    plotter(snakes)
+
+    randos = random_curve(8)
+    plotter(randos)
 
     """
-    snakes = snake_curve()
-    plotter(snakes)
-    plt.clf()
 
     peas = peano_curve()
     plotter(peas)
@@ -161,10 +184,6 @@ def main():
 
     mores = moore_curve()
     plotter(mores)
-    plt.clf()
-
-    randos = random_curve()
-    plotter(randos)
     plt.clf()
     """
     
