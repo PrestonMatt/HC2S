@@ -69,6 +69,19 @@ If you want to see what a curve looks like here is an example for 512 points (or
   </figure>
 </p>
 
+If you follow the colors with your eyes you can actually trace out all the lower orders of pseudo-Hilbert curves (for order 8 will need to probably have eagle eyes!). Here's an example of orders 1 and 2 traced through the colors:
+
+<p align="center">
+  <img src="/Images/curves/h_curve_512_traced_order1.png" />
+  <figure id="fig:1">
+  </figure>
+</p>
+<p align="center">
+  <img src="/Images/curves/h_curve_512_TRACED_order2.png" />
+  <figure id="fig:1">
+  </figure>
+</p>
+
 The pixel bumping between colors (red looking slightly higher than blue) is an artifact of compression from the matplotlib library. You can see here that the curve is, in fact, not uneven from left to right:
 
 <p align="center">
