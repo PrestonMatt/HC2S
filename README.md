@@ -1,26 +1,6 @@
 # Hilbert Curve to Sound Project
 This project is inspired by the 'fantastical' (i.e. not-yet-realized) code described in this video: https://www.youtube.com/watch?v=3s7h2MHQtxc and this project: https://community.wolfram.com/groups/-/m/t/1862464
 
-## UPDATE 26 March 2023:
-Install requirements via command line with the following command:
-
-`pip3 install -r requirements.txt`
-
-The sample image used is from publicdomainpictures.net and can be found here: https://as2.ftcdn.net/jpg/03/04/58/91/220_F_304589144_Zcp4X2dHDJvSBO6mx98bj1kuLIPY6HwW.jpg
-
-I have overhauled imageInterpreter.py to an initial functional working state, and created a quirky Hilbert-Curve iterative function. There are also auto-genearted test cases from the Pillow (PIL) Image library. What's next is to hook up the image upload to the curve function and generate noise from there. Then, I envision taking the sound signal and trying to decompose it using a Fourier Transform.
-
-I envision experimentation with ML to be as follows:
- 1. Can a basic ML model tell from a given sound byte if the image is 'bee' or 'three'?
-  - I.E. given just the sound, categorize the image
-  - Is this easier given a decomposed Fourier Transform?
-  - Which general model works best (neural net, logistic regression, etc.)
- 2. Can a basic ML model roughly reproduce an image from a sound byte?
-  - How well is the reproduction compared to the original?
-  - Again, which model does it best?
- 3. Can this sound to category or sound to image model have a real-world application?
-  - Is it easier to train on sound-bits from images rather than images themselves?
-
 ## Project Statement 26 March 2020
 
 ## Abstract
@@ -58,6 +38,44 @@ In addition, mapping the colors and brightness to sound in an *intuitive* manner
 This application may be useful as:
   - A tool in research on brain plasticity. Scientists are trying to answer and experiment with ideas and questions on just what auditory and visual cortexes can do, and the limits of how ‘plastic’ our brains are: http://web.mit.edu/surlab/publications/Newton_Sur04.pdf
   - A tool in image processing research. If indeed it’s true that ML models can more easily classify images when they’re encoded to sound than as they are as pictures, then it might speed up scientific research that right now has tons of image data that necessitates machine learning. For example the problem as discussed in this video: https://www.youtube.com/watch?v=tSoqJpisKIg
+
+## UPDATE 26 March 2023:
+Install requirements via command line with the following command:
+
+`pip3 install -r requirements.txt`
+
+The sample image used is from publicdomainpictures.net and can be found here: https://as2.ftcdn.net/jpg/03/04/58/91/220_F_304589144_Zcp4X2dHDJvSBO6mx98bj1kuLIPY6HwW.jpg
+
+I have overhauled imageInterpreter.py to an initial functional working state, and created a quirky Hilbert-Curve iterative function. There are also auto-genearted test cases from the Pillow (PIL) Image library. What's next is to hook up the image upload to the curve function and generate noise from there. Then, I envision taking the sound signal and trying to decompose it using a Fourier Transform.
+
+I envision experimentation with ML to be as follows:
+ 1. Can a basic ML model tell from a given sound byte if the image is 'bee' or 'three'?
+  - I.E. given just the sound, categorize the image
+  - Is this easier given a decomposed Fourier Transform?
+  - Which general model works best (neural net, logistic regression, etc.)
+ 2. Can a basic ML model roughly reproduce an image from a sound byte?
+  - How well is the reproduction compared to the original?
+  - Again, which model does it best?
+ 3. Can this sound to category or sound to image model have a real-world application?
+  - Is it easier to train on sound-bits from images rather than images themselves?
+
+## 3 April 2023:
+
+If you want to see what a curve looks like here is an example for 512 points (order 9 as 2**9 = 512). The colors are of the rainbow to see the curve, and goes from blue to red.
+
+<p align="center">
+  <img src="/Images/curves/h_curve_512.png" />
+  <figure id="fig:1">
+  </figure>
+</p>
+
+The pixel bumping between colors (red looking slightly higher than blue) is an artifact of compression from the matplotlib library. You can see here that the curve is, in fact, not uneven from left to right:
+
+<p align="center">
+  <img src="/Images/curves/512_zoomed.png" />
+  <figure id="fig:1">
+  </figure>
+</p>
 
 ## Works Cited
 
