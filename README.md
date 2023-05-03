@@ -64,7 +64,7 @@ I envision experimentation with ML to be as follows:
 If you want to see what a curve looks like here is an example for 512 points (order 9 as 2**9 = 512). The colors are of the rainbow to see the curve, and goes from blue to red.
 
 <p align="center">
-  <img src="/Images/curves/h_curve_512.png" />
+  <img src="/Images/curves/h_curve_512_full.png" />
   <figure id="fig:1">
   </figure>
 </p>
