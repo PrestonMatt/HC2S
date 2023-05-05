@@ -124,7 +124,6 @@ def peano_curve(order):
     """
     return(peano_curve_parser.pea_curve_list(order))
 
-
 def macrotile_curve_3():
 
     return([[0,0]])
@@ -159,7 +158,9 @@ def random_curve(width:int) -> list:
     return(points)
 
 def main():
-
+    peas = peano_curve(3)
+    plotter(peas)
+    """
     #hcurve1 = hibert_curve(1,32)
     #plotter(hcurve1)
     #proceed = input(">")
@@ -185,22 +186,14 @@ def main():
     #zese = z_curve(0,0,3)
     #plotter(zese)
 
-    """
-
-    
-    plt.clf()
-
     macncheese = macrotile_curve()
     plotter(macncheese)
-    plt.clf()
-
+  
     ease = e_curve()
     plotter(ease)
-    plt.clf()
-
+ 
     mores = moore_curve()
     plotter(mores)
-    plt.clf()
     """
     
 if __name__ == "__main__":

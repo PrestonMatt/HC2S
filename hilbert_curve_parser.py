@@ -4,19 +4,27 @@ try:
 except ModuleNotFoundError:
     print("Import failed; module not found.\nTry running the following command:\npip3 install -r requirements.txt")
 
-#goal of this file:
-#given an Image object,
-#return 1d array of rgbval and brighness in an hilbert curve path pixel to pixel
-#-------------------------------------------------------------------------------------------#
-#we will get the hilbert curve by computing up
-#mapping bits to cartesian coordinates
-
-#go through an image, pixel to pixel
-#in a hilbert curve way
-#this will effectively be mapping curve corners to
-#the cartesian coordinates that our computer needs.
-#given N as height and width of image...
+"""
+    Goal of this file:
+    Given a the dimension of an image,
+    return 1d array of the Hilbert curve path,
+    which will represent the walking path pixel to pixel.
+    #-------------------------------------------------------------------------------------------#
+    We will get the Hilbert curve by iteratively computing up
+    and mapping bits to cartesian coordinates.
+"""
 def iterative_hc(hil_index, N):
+    """
+        This function will create the array to instruct how to 
+        go through an image, pixel to pixel in a Hilbert curve way.
+        
+        This will effectively be mapping Hilbert curve corners to
+        the cartesian coordinates that our computer needs.
+        
+        This is all done just given N which represents 
+        the height slash width of image.
+    """
+
     #Starting point is always 0,0
     x, y = 0, 0
     #iteratively calculate the coordinate:
@@ -79,7 +87,7 @@ def hil_curve_list(photo_dim):
     if(check_image(photo_dim)):
         for x in range(photo_dim*photo_dim):
             curnt = iterative_hc(x,photo_dim)
-            print(curnt)
+            #print(curnt)
             hc2c.append(curnt)
     return hc2c
 
