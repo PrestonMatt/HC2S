@@ -1,4 +1,3 @@
-
 try:
     from matplotlib import pyplot as plt
     from matplotlib import cm
@@ -9,6 +8,7 @@ try:
     from hilbertcurve.hilbertcurve import HilbertCurve
     from hilbert import decode, encode
     import hilbert_curve_parser
+    import peano_curve_parser
     #import itertools
     from random import sample
 except ModuleNotFoundError:
@@ -98,7 +98,14 @@ def quirky_hil_curve(order: int) -> list:
     return(hilbert_curve_parser.hil_curve_list(order))
 
 def snake_curve(width:int) -> list:
-
+    """
+        Generates an S-curve given the side length of the
+        square (image) it's trying to fill.
+        This is the niave approach in the original video,
+        and is meant for demonstration purposes.
+        The problem with higher orders (larger widths) is
+        that the locality of points is not preserved.
+    """
     points = []
     for y in range(width+1):
         if(y % 2 == 0):
@@ -110,11 +117,19 @@ def snake_curve(width:int) -> list:
     
     return(points)
 
-def peano_curve():
+def peano_curve(order):
+    """
+        Generates a sequence of points on the x,y
+        plane for a Peano curve of given order.
+    """
+    return(peano_curve_parser.pea_curve_list(order))
+
+
+def macrotile_curve_3():
 
     return([[0,0]])
 
-def macrotile_curve():
+def macrotile_curve_4():
 
     return([[0,0]])
 
@@ -122,7 +137,7 @@ def e_curve():
 
     return([[0,0]])
 
-def z_curve():
+def z_curve(x:int, y:int, order:int) -> np.array:
 
     return([[0,0]])
 
@@ -150,24 +165,29 @@ def main():
     #proceed = input(">")
     
     #hilbert = hil_curve(64)
-    hilbert = hil_curve(64)
-    plotter(hilbert)
+    #hilbert = hil_curve(64)
+    #plotter(hilbert)
     #proceed = input(">")
 
     #un comment this when you want, but it current takes a long time.
-    #qhilbert = quirky_hil_curve(512)
-    #plotter(qhilbert)
+    qhilbert = quirky_hil_curve(128)
+    plotter(qhilbert)
 
-    snakes = snake_curve(8)
+    snakes = snake_curve(128)
     plotter(snakes)
 
-    randos = random_curve(8)
+    randos = random_curve(128)
     plotter(randos)
+
+    peas = peano_curve(3)
+    plotter(peas)
+
+    #zese = z_curve(0,0,3)
+    #plotter(zese)
 
     """
 
-    peas = peano_curve()
-    plotter(peas)
+    
     plt.clf()
 
     macncheese = macrotile_curve()
@@ -176,10 +196,6 @@ def main():
 
     ease = e_curve()
     plotter(ease)
-    plt.clf()
-
-    zese = z_curve()
-    plotter(zese)
     plt.clf()
 
     mores = moore_curve()
